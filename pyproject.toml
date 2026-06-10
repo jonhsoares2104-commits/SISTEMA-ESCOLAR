@@ -1,0 +1,17 @@
+[project]
+name = "sistema-escolar-python"
+version = "1.0.0"
+description = "Sistema escolar simples em Python com SQLite e CLI."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "Seu Nome" }
+]
+license = { text = "MIT" }
+
+[project.scripts]
+school-system = "school_system.cli:main"
+
+[tool.ruff]
+line-length = 100
+
