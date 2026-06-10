@@ -1,4 +1,4 @@
-[project]
+[sistema-escolar]
 name = "sistema-escolar-python"
 version = "1.0.0"
 description = "Sistema escolar simples em Python com SQLite e CLI."
@@ -8,7 +8,7 @@ dependencies = [
   "Flask>=3.0,<4.0"
 ]
 authors = [
-  { name = "Seu Nome" }
+  { name = "João Guilherme" }
 ]
 license = { text = "MIT" }
 
