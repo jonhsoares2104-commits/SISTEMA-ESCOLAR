@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Rotina</p>
+    <h1>Frequencia</h1>
+  </div>
+</section>
+
+<section class="grid-two">
+  <form class="panel form" method="post">
+    <h2>Registro de frequencia</h2>
+    <label>Matricula
+      <select name="enrollment_id" required>
+        {% for enrollment in enrollments %}
+          <option value="{{ enrollment.id }}">{{ enrollment.student }} - {{ enrollment.class_name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Data<input name="date" type="date" required></label>
+    <label>Situacao
+      <select name="present" required>
+        <option value="1">Presente</option>
+        <option value="0">Ausente</option>
+      </select>
+    </label>
+    <button type="submit">Registrar</button>
+  </form>
+
+  <section class="panel">
+    <h2>Frequencia registrada</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Aluno</th><th>Data</th><th>Situacao</th></tr></thead>
+        <tbody>
+          {% for item in attendance %}
+            <tr>
+              <td>{{ item.id }}</td>
+              <td>{{ item.student }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ "Presente" if item.present else "Ausente" }}</td>
+            </tr>
+          {% else %}
+            <tr><td colspan="4" class="empty">Nenhuma frequencia registrada.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+{% endblock %}
+

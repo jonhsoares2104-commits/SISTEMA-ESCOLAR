@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Academico</p>
+    <h1>Matriculas</h1>
+  </div>
+</section>
+
+<section class="grid-two">
+  <form class="panel form" method="post">
+    <h2>Nova matricula</h2>
+    <label>Aluno
+      <select name="student_id" required>
+        {% for student in students %}
+          <option value="{{ student.id }}">{{ student.name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Turma
+      <select name="class_id" required>
+        {% for class_item in classes %}
+          <option value="{{ class_item.id }}">{{ class_item.name }} - {{ class_item.year }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Data<input name="date" type="date"></label>
+    <button type="submit">Matricular</button>
+  </form>
+
+  <section class="panel">
+    <h2>Matriculas cadastradas</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Aluno</th><th>Turma</th><th>Ano</th><th>Data</th><th></th></tr></thead>
+        <tbody>
+          {% for enrollment in enrollments %}
+            <tr>
+              <td>{{ enrollment.id }}</td>
+              <td>{{ enrollment.student }}</td>
+              <td>{{ enrollment.class_name }}</td>
+              <td>{{ enrollment.year }}</td>
+              <td>{{ enrollment.enrollment_date }}</td>
+              <td>
+                <form method="post" action="{{ url_for('delete_enrollment', enrollment_id=enrollment.id) }}">
+                  <button class="danger" type="submit">Remover</button>
+                </form>
+              </td>
+            </tr>
+          {% else %}
+            <tr><td colspan="6" class="empty">Nenhuma matricula cadastrada.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+{% endblock %}
+

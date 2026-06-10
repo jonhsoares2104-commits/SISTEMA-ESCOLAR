@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Cadastro</p>
+    <h1>Professores</h1>
+  </div>
+</section>
+
+<section class="grid-two">
+  <form class="panel form" method="post">
+    <h2>Novo professor</h2>
+    <label>Nome<input name="name" required></label>
+    <label>Materia<input name="subject" required></label>
+    <label>Email<input name="email" type="email"></label>
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <section class="panel">
+    <h2>Professores cadastrados</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Nome</th><th>Materia</th><th>Email</th><th></th></tr></thead>
+        <tbody>
+          {% for teacher in teachers %}
+            <tr>
+              <td>{{ teacher.id }}</td>
+              <td>{{ teacher.name }}</td>
+              <td>{{ teacher.subject }}</td>
+              <td>{{ teacher.email or "-" }}</td>
+              <td>
+                <form method="post" action="{{ url_for('delete_teacher', teacher_id=teacher.id) }}">
+                  <button class="danger" type="submit">Remover</button>
+                </form>
+              </td>
+            </tr>
+          {% else %}
+            <tr><td colspan="5" class="empty">Nenhum professor cadastrado.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+{% endblock %}
+

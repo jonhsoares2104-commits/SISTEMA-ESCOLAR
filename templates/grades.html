@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Avaliacao</p>
+    <h1>Notas</h1>
+  </div>
+</section>
+
+<section class="grid-two">
+  <form class="panel form" method="post">
+    <h2>Nova nota</h2>
+    <label>Matricula
+      <select name="enrollment_id" required>
+        {% for enrollment in enrollments %}
+          <option value="{{ enrollment.id }}">{{ enrollment.student }} - {{ enrollment.class_name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Materia<input name="subject" required></label>
+    <label>Nota<input name="grade" type="number" min="0" max="10" step="0.1" required></label>
+    <button type="submit">Lancar</button>
+  </form>
+
+  <section class="panel">
+    <h2>Notas lancadas</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Aluno</th><th>Materia</th><th>Nota</th><th>Data</th></tr></thead>
+        <tbody>
+          {% for grade in grades %}
+            <tr>
+              <td>{{ grade.id }}</td>
+              <td>{{ grade.student }}</td>
+              <td>{{ grade.subject }}</td>
+              <td>{{ grade.grade }}</td>
+              <td>{{ grade.created_at }}</td>
+            </tr>
+          {% else %}
+            <tr><td colspan="5" class="empty">Nenhuma nota lancada.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+{% endblock %}
+

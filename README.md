@@ -1,6 +1,6 @@
 # Sistema Escolar em Python
 
-Um sistema escolar simples feito em Python, com banco de dados SQLite e interface por linha de comando.
+Um sistema escolar simples feito em Python, com banco de dados SQLite, interface por linha de comando e interface web com Flask.
 
 O projeto permite cadastrar alunos, professores, turmas, matrículas, notas e presenças. Ele foi pensado para ser fácil de estudar, modificar e publicar no GitHub.
 
@@ -19,7 +19,25 @@ O projeto permite cadastrar alunos, professores, turmas, matrículas, notas e pr
 
 - Python 3.11 ou superior.
 
-Não é necessário instalar dependências externas para usar o sistema.
+Para usar apenas o terminal, não é necessário instalar dependências externas.
+
+Para usar a interface web, instale:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Como rodar a interface web
+
+```bash
+python app.py
+```
+
+Depois abra:
+
+```text
+http://127.0.0.1:5000
+```
 
 ## Como rodar
 
@@ -131,4 +149,3 @@ tests/
 - Exportar relatórios em PDF ou CSV.
 - Criar dashboard com indicadores da escola.
 - Adicionar validação mais completa de CPF, telefone e e-mail.
-

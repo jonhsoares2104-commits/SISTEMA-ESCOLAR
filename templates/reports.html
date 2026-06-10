@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Relatorio</p>
+    <h1>Aluno</h1>
+  </div>
+</section>
+
+<form class="panel form-inline" method="post">
+  <label>Aluno
+    <select name="student_id" required>
+      {% for student in students %}
+        <option value="{{ student.id }}" {% if selected_student_id == student.id %}selected{% endif %}>
+          {{ student.name }}
+        </option>
+      {% endfor %}
+    </select>
+  </label>
+  <button type="submit">Gerar</button>
+</form>
+
+{% if report %}
+  <section class="panel">
+    <h2>{{ report.student.name }}</h2>
+    <div class="details">
+      <span>Nascimento: {{ report.student.birth_date }}</span>
+      <span>Email: {{ report.student.email or "-" }}</span>
+      <span>Telefone: {{ report.student.phone or "-" }}</span>
+    </div>
+  </section>
+
+  <section class="grid-two">
+    <section class="panel">
+      <h2>Notas</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Materia</th><th>Nota</th><th>Data</th></tr></thead>
+          <tbody>
+            {% for grade in report.grades %}
+              <tr><td>{{ grade.subject }}</td><td>{{ grade.grade }}</td><td>{{ grade.created_at }}</td></tr>
+            {% else %}
+              <tr><td colspan="3" class="empty">Nenhuma nota lancada.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Frequencia</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Data</th><th>Situacao</th></tr></thead>
+          <tbody>
+            {% for item in report.attendance %}
+              <tr><td>{{ item.date }}</td><td>{{ "Presente" if item.present else "Ausente" }}</td></tr>
+            {% else %}
+              <tr><td colspan="2" class="empty">Nenhuma frequencia registrada.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+{% endif %}
+{% endblock %}
+

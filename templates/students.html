@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Cadastro</p>
+    <h1>Alunos</h1>
+  </div>
+</section>
+
+<section class="grid-two">
+  <form class="panel form" method="post">
+    <h2>Novo aluno</h2>
+    <label>Nome<input name="name" required></label>
+    <label>Nascimento<input name="birth_date" type="date" required></label>
+    <label>Email<input name="email" type="email"></label>
+    <label>Telefone<input name="phone"></label>
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <section class="panel">
+    <h2>Alunos cadastrados</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Nome</th><th>Nascimento</th><th>Email</th><th></th></tr></thead>
+        <tbody>
+          {% for student in students %}
+            <tr>
+              <td>{{ student.id }}</td>
+              <td>{{ student.name }}</td>
+              <td>{{ student.birth_date }}</td>
+              <td>{{ student.email or "-" }}</td>
+              <td>
+                <form method="post" action="{{ url_for('delete_student', student_id=student.id) }}">
+                  <button class="danger" type="submit">Remover</button>
+                </form>
+              </td>
+            </tr>
+          {% else %}
+            <tr><td colspan="5" class="empty">Nenhum aluno cadastrado.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+{% endblock %}
+

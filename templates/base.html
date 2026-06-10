@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title or "Sistema Escolar" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <a class="brand" href="{{ url_for('index') }}">
+          <span class="brand-mark">SE</span>
+          <span>
+            <strong>Sistema Escolar</strong>
+            <small>Gestao academica</small>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="{{ url_for('index') }}">Resumo</a>
+          <a href="{{ url_for('students') }}">Alunos</a>
+          <a href="{{ url_for('teachers') }}">Professores</a>
+          <a href="{{ url_for('classes') }}">Turmas</a>
+          <a href="{{ url_for('enrollments') }}">Matriculas</a>
+          <a href="{{ url_for('grades') }}">Notas</a>
+          <a href="{{ url_for('attendance') }}">Frequencia</a>
+          <a href="{{ url_for('reports') }}">Relatorios</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="messages">
+              {% for category, message in messages %}
+                <div class="message {{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </body>
+</html>
+
